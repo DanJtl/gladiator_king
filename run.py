@@ -167,7 +167,7 @@ def enemy_creation(elite_enemy):
         dmg = random.randint(15, 30)
         health = random.randint(80, 160)
         luck = random.randint(3, 10)
-        special = random.randint(30, 60)
+        special = random.randint(40, 60)
 
         return Elite(enemy_name, dmg, health, luck, special)
 
@@ -178,11 +178,14 @@ def enemy_creation(elite_enemy):
         
         return Enemy(enemy_name, dmg, health, luck)
 
-elite_enemy = True
+def enemy_attack():
+
+elite_enemy = False
 
 random_enemy = enemy_creation(elite_enemy)
 
 pprint(vars(random_enemy))
+
 
 # Save character stats as a list
 #character_stats = player_creation()
