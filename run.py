@@ -95,11 +95,8 @@ class Elite(Enemy):
     def setSpecial(self, update_special):
         self.special = update_special
 
-
+# Create a character by letting the player answer some questions
 def player_creation():
-    """
-    Create a character by letting the player answer some questions
-    """
     print("You are once again led by three guards towards the iron gate…")
     print("The iron gate opens slowly, and you feel…")
 
@@ -159,17 +156,36 @@ def player_creation():
 
     return [Player.name, Player.dmg, Player.health, Player.luck]
 
+# Create an enemy and set enemy stats
 def enemy_creation(elite_enemy):
     enemy_name_first = ("Angry", "Big", "Aggresive", "Furious", "Crazy", "Creepy", "Dangerous", "Evil", "Powerful", "Scary")
     enemy_name_last = ("Goblin", "Troll", "Undead", "Monster", "Orc", "Zombie", "Skeleton", "Cyclop", "Dragon", "Ghoul")
 
     enemy_name = random.choice(enemy_name_first)+" "+random.choice(enemy_name_last)
-    print(enemy_name)
+    
+    if elite_enemy == True:
+        dmg = random.randint(15, 30)
+        health = random.randint(80, 160)
+        luck = random.randint(3, 10)
+        special = random.randint(30, 60)
 
-enemy_creation(elite_enemy)
+        return Elite(enemy_name, dmg, health, luck, special)
+
+    else:
+        dmg = random.randint(1, 15)
+        health = random.randint(20, 80)
+        luck = random.randint(1, 6)
+        
+        return Enemy(enemy_name, dmg, health, luck)
+
+elite_enemy = True
+
+random_enemy = enemy_creation(elite_enemy)
+
+pprint(vars(random_enemy))
 
 # Save character stats as a list
-character_stats = player_creation()
-player_character = Player(character_stats[0], character_stats[1], character_stats[2], character_stats[3])
+#character_stats = player_creation()
+#player_character = Player(character_stats[0], character_stats[1], character_stats[2], character_stats[3])
 
-pprint(vars(player_character))
+#pprint(vars(player_character))
