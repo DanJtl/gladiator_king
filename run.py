@@ -30,7 +30,7 @@ class Player:
     # Setters for player class - so you can update the health attribute e.g.
     def setName(self, update_name):
         self.name = update_name
-    def setAp(self, update_ap):
+    def setDmg(self, update_dmg):
         self.dmg = update_dmg
     def setHealth(self, update_health):
         self.health = update_health
@@ -47,6 +47,25 @@ class Enemy:
         self.health = enemy_health
         self.luck = enemy_luck
 
+    # Getters for enemy class
+    def getName(self):
+        return self.name
+    def getDmg(self):
+        return self.dmg
+    def getHealth(self):
+        return self.health
+    def getLuck(self):
+        return self.luck
+
+    # Setters for enemy class
+    def setName(self, update_name):
+        self.name = update_name
+    def setDmg(self, update_dmg):
+        self.dmg = update_dmg
+    def setHealth(self, update_health):
+        self.health = update_health
+    def setLuck(self, update_luck):
+        self.luck = update_luck
 
 def player_creation():
     """
