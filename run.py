@@ -5,11 +5,11 @@ from pprint import pprint
 
 class Player:
     """
-    Creates base class for player
+    Creates class for player
     """
-    def __init__(self, player_name, player_ap, player_health, player_luck):
+    def __init__(self, player_name, player_dmg, player_health, player_luck):
         self.name = player_name
-        self.ap = player_ap
+        self.dmg = player_dmg
         self.health = player_health
         self.luck = player_luck
 
@@ -20,33 +20,37 @@ class Player:
     """
     def getName(self):
         return self.name
-
-    def getAp(self):
-        return self.ap
-
+    def getDmg(self):
+        return self.dmg
     def getHealth(self):
         return self.health
-
     def getLuck(self):
         return self.luck
 
     # Setters for player class - so you can update the health attribute e.g.
     def setName(self, update_name):
         self.name = update_name
-
     def setAp(self, update_ap):
-        self.ap = update_ap
-
+        self.dmg = update_dmg
     def setHealth(self, update_health):
         self.health = update_health
- 
     def setLuck(self, update_luck):
         self.luck = update_luck
+
+class Enemy:
+    """
+    Creates base class for enemies
+    """
+    def __init__(self, enemy_name, enemy_dmg, enemy_health, enemy_luck):
+        self.name = enemy_name
+        self.dmg = enemy_dmg
+        self.health = enemy_health
+        self.luck = enemy_luck
 
 
 def player_creation():
     """
-    Create a player by letting the player answer some questions
+    Create a character by letting the player answer some questions
     """
     print("You are once again led by three guards towards the iron gate…")
     print("The iron gate opens slowly, and you feel…")
@@ -62,17 +66,17 @@ def player_creation():
         player_stats = input("a) ...extra strong.\nb) …young and athletic.\nc) …lucky and pumped.\n").lower()
 
     if player_stats == "a":
-        Player.ap = 40
+        Player.dmg = 40
         Player.health = 80
         Player.luck = 5
 
     elif player_stats == "b":
-        Player.ap = 20
+        Player.dmg = 20
         Player.health = 140
         Player.luck = 5
 
     elif player_stats == "c":
-        Player.ap = 20
+        Player.dmg = 20
         Player.health = 100
         Player.luck = 8
 
@@ -90,24 +94,25 @@ def player_creation():
         weapon_choice = input("a) Executioner's Sword.\nb) Sword and shield.\nc) Halberd.\n").lower()
 
     if weapon_choice == "a":
-        Player.ap += 30
+        Player.dmg += 30
 
     elif weapon_choice == "b":
-        Player.ap += 10
+        Player.dmg += 10
         Player.health += 20
 
     elif weapon_choice == "c":
-        Player.ap += 20
+        Player.dmg += 20
         Player.luck += 2
 
     print("As you enter the arena, you hear the crowd goes wild...")
     Player.name = input("What is your name?\n")
     print(Player.name.upper(), "! ...echoes through the arena.")
     print("Your stats are:\n")
-    return (Player.name, Player.ap, Player.health, Player.luck)
 
-game = player_creation()
+    return [Player.name, Player.dmg, Player.health, Player.luck]
 
-player_character = Player(game[0], game[1], game[2], game[3])
+# Save character stats as a list
+character_stats = player_creation()
+player_character = Player(character_stats[0], character_stats[1], character_stats[2], character_stats[3])
 
 pprint(vars(player_character))
