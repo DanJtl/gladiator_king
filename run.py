@@ -159,6 +159,15 @@ def player_creation():
 
     return [Player.name, Player.dmg, Player.health, Player.luck]
 
+def enemy_creation(elite_enemy):
+    enemy_name_first = ("Angry", "Big", "Aggresive", "Furious", "Crazy", "Creepy", "Dangerous", "Evil", "Powerful", "Scary")
+    enemy_name_last = ("Goblin", "Troll", "Undead", "Monster", "Orc", "Zombie", "Skeleton", "Cyclop", "Dragon", "Ghoul")
+
+    enemy_name = random.choice(enemy_name_first)+" "+random.choice(enemy_name_last)
+    print(enemy_name)
+
+enemy_creation(elite_enemy)
+
 # Save character stats as a list
 character_stats = player_creation()
 player_character = Player(character_stats[0], character_stats[1], character_stats[2], character_stats[3])
