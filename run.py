@@ -20,20 +20,26 @@ class Player:
     """
     def getName(self):
         return self.name
+
     def getDmg(self):
         return self.dmg
+
     def getHealth(self):
         return self.health
+
     def getLuck(self):
         return self.luck
 
     # Setters for player class - so you can update the health attribute e.g.
     def setName(self, update_name):
         self.name = update_name
+
     def setDmg(self, update_dmg):
         self.dmg = update_dmg
+
     def setHealth(self, update_health):
         self.health = update_health
+
     def setLuck(self, update_luck):
         self.luck = update_luck
 
@@ -50,22 +56,45 @@ class Enemy:
     # Getters for enemy class
     def getName(self):
         return self.name
+
     def getDmg(self):
         return self.dmg
+
     def getHealth(self):
         return self.health
+
     def getLuck(self):
         return self.luck
 
     # Setters for enemy class
     def setName(self, update_name):
         self.name = update_name
+
     def setDmg(self, update_dmg):
         self.dmg = update_dmg
+
     def setHealth(self, update_health):
         self.health = update_health
+
     def setLuck(self, update_luck):
         self.luck = update_luck
+
+class Elite(Enemy):
+    """
+    Create elite enemies by inherit from enemy class
+    """
+    def __init__(self, enemy_name, enemy_dmg, enemy_health, enemy_luck, elite_special):
+        super().__init__(enemy_name, enemy_dmg, enemy_health, enemy_luck)
+        self.special = elite_special
+
+    # Getter for elite class
+    def getSpecial(self):
+        return self.special
+
+    # Setter for elite class
+    def setSpecial(self, update_special):
+        self.special = update_special
+
 
 def player_creation():
     """
