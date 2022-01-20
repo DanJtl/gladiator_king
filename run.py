@@ -48,17 +48,17 @@ def player_creation():
     if player_stats == "a":
         Player.dmg = 40
         Player.health = 80
-        Player.luck = random.randint(4, 10)
+        Player.luck = random.randint(2, 6)
 
     elif player_stats == "b":
         Player.dmg = 20
         Player.health = 140
-        Player.luck = random.randint(4, 10)
+        Player.luck = random.randint(2, 6)
 
     elif player_stats == "c":
         Player.dmg = 20
         Player.health = 100
-        Player.luck = random.randint(7, 10)
+        Player.luck = random.randint(4, 6)
 
     print("\nThe guards turn to you, and you know it's time to pick a weapon...")
     print("Which one do you choose?")
@@ -117,7 +117,7 @@ def enemy_creation(elite_enemy):
     else:
         Enemy.dmg = random.randint(1, 15)
         Enemy.health = random.randint(50, 120)
-        Enemy.luck = random.randint(1, 8)
+        Enemy.luck = random.randint(1, 6)
 
         return Enemy(Enemy.name, Enemy.dmg, Enemy.health, Enemy.luck)
 
@@ -151,10 +151,10 @@ def player_attack():
 
     if attack_choice == "a":
         Player.dmg -= 10
-        Player.luck += 4
+        Player.luck += 2
 
     elif attack_choice == "b":
-        Player.dmg += 0
+        Player.dmg += 5
 
     elif attack_choice == "c":
         Player.dmg += 20
@@ -171,29 +171,45 @@ def player_attack():
 
     else:
         print("You fumble and miss!")
-
+"""
     if attack_choice == "a":
         Player.dmg += 10
-        Player.luck -= 4
+        Player.luck -= 2
 
     elif attack_choice == "b":
-        Player.dmg += 0
+        Player.dmg -= 5
 
     elif attack_choice == "c":
         Player.dmg -= 20
         Player.luck += 2
-
+"""
 # Battle function
 def battle():
-    
+
+    while Player.health > 0 and Enemy.health > 0:
+
+        player_attack()
+        print(f"\n{Enemy.name}'s health is now {Enemy.health}.")
+        if Enemy.health <= 0:
+            print(f"You killed the {Enemy.name}!")
+            print(f"Everyone in the arena is shouting your name... {Player.name.upper()}!")
+        else:
+            enemy_attack()
+            print(f"\nYour Health is now {Player.health}.")
+        if Player.health <= 0:
+            print("You fought your hardest...")
+            print("...but it wasn't enough.")
+        
+
 
 player_character = player_creation()
 
 elite_enemy = None
 random_enemy = enemy_creation(elite_enemy)
+battle()
 
 #battle()
-player_attack()
-print(Player.health)
-print(Enemy.health)
-pprint(vars(player_character))
+#player_attack()
+#print(Player.health)
+#print(Enemy.health)
+#pprint(vars(player_character))
