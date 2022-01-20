@@ -117,7 +117,7 @@ def enemy_creation(elite_enemy):
 
 # Attack function for enemies
 def enemy_attack():
-    print(f"{Enemy.name} is attacking you...")
+    print(f"\n{Enemy.name} is attacking you...")
     hit = random.randint(0, 10)
 
     if hit <= Enemy.luck:
@@ -130,6 +130,21 @@ def enemy_attack():
         print(f"{Enemy.name} fumbles and misses!")
         return 0
 
+# Attack function for player
+def player_attack():
+    print(f"\nYou raise your weapon and attack the {Enemy.name}...")
+    hit = random.randint(0, 10)
+
+    if hit <= Player.luck:
+        print("You hit it and do...")
+        Enemy.health -= Player.dmg
+        print(f"{Player.dmg} in damage!")
+        return Enemy.health
+
+    else:
+        print("You fumble and miss!")
+        return 0
+
 def battle():
     print("\nIn front of you, you can see your opponent...")
     print(f"It's the {Enemy.name}.")
@@ -138,14 +153,13 @@ def battle():
 
 
 
-# def enemy_attack():
-# Save character stats as a list
-
 player_character = player_creation()
 
 elite_enemy = True
 random_enemy = enemy_creation(elite_enemy)
 
 battle()
-
+player_attack()
+print(Player.health)
+print(Enemy.health)
 
