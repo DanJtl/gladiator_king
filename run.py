@@ -1,4 +1,3 @@
-import math
 import random
 from pprint import pprint
 
@@ -49,17 +48,17 @@ def player_creation():
     if player_stats == "a":
         Player.dmg = 40
         Player.health = 80
-        Player.luck = 5
+        Player.luck = random.randint(4, 10)
 
     elif player_stats == "b":
         Player.dmg = 20
         Player.health = 140
-        Player.luck = 5
+        Player.luck = random.randint(4, 10)
 
     elif player_stats == "c":
         Player.dmg = 20
         Player.health = 100
-        Player.luck = 8
+        Player.luck = random.randint(7, 10)
 
     print("\nThe guards turn to you, and you know it's time to pick a weapon...")
     print("Which one do you choose?")
@@ -99,9 +98,8 @@ def enemy_creation(elite_enemy):
     enemy_name_last = ("Goblin", "Troll", "Undead", "Monster", "Orc", "Zombie", "Skeleton", "Cyclop", "Dragon", "Ghoul")
 
     Enemy.name = random.choice(enemy_name_first)+" "+random.choice(enemy_name_last)
-    
+
     elite_enemy = random.randint(0, 10)
-    print(elite_enemy)
 
     if elite_enemy >= 7:
         elite_enemy = True
@@ -110,7 +108,7 @@ def enemy_creation(elite_enemy):
 
     if elite_enemy is True:
         Enemy.dmg = random.randint(15, 30)
-        Enemy.health = random.randint(80, 160)
+        Enemy.health = random.randint(120, 200)
         Enemy.luck = random.randint(3, 10)
         Enemy.special = random.randint(40, 60)
 
@@ -118,9 +116,9 @@ def enemy_creation(elite_enemy):
 
     else:
         Enemy.dmg = random.randint(1, 15)
-        Enemy.health = random.randint(20, 80)
-        Enemy.luck = random.randint(1, 6)
- 
+        Enemy.health = random.randint(50, 120)
+        Enemy.luck = random.randint(1, 8)
+
         return Enemy(Enemy.name, Enemy.dmg, Enemy.health, Enemy.luck)
 
 # Attack function for enemies
@@ -140,6 +138,25 @@ def enemy_attack():
 
 # Attack function for player
 def player_attack():
+    print("You look at the enemy and decides to do a...")
+    attack_choice = input("a) Fast attack.\nb) Normal attack.\nc) Charge attack.\n").lower()
+
+    while attack_choice != "a" and attack_choice != "b" and attack_choice != "c":
+        print("You need to type: a, b or c...")
+        prin("You look at the enemy and decides to do a...")
+        attack_choice = input("a) Fast attack.\nb) Normal attack.\nc) Charge attack.\n").lower()
+
+    if attack_choice == "a":
+        Player.dmg -= 10
+        Player.luck += 4
+
+    elif attack_choice == "b":
+        Player.dmg += 0
+
+    elif attack_choice == "c":
+        Player.dmg += 20
+        Player.luck -= 2
+
     print(f"\nYou raise your weapon and attack the {Enemy.name}...")
     hit = random.randint(0, 10)
 
@@ -151,7 +168,17 @@ def player_attack():
 
     else:
         print("You fumble and miss!")
-        return 0
+        
+    if attack_choice == "a":
+        Player.dmg += 10
+        Player.luck -= 4
+
+    elif attack_choice == "b":
+        Player.dmg += 0
+
+    elif attack_choice == "c":
+        Player.dmg -= 20
+        Player.luck += 2
 
 
 
@@ -172,4 +199,4 @@ battle()
 player_attack()
 print(Player.health)
 print(Enemy.health)
-
+pprint(vars(player_character))
