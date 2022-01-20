@@ -99,6 +99,14 @@ def enemy_creation(elite_enemy):
     enemy_name_last = ("Goblin", "Troll", "Undead", "Monster", "Orc", "Zombie", "Skeleton", "Cyclop", "Dragon", "Ghoul")
 
     Enemy.name = random.choice(enemy_name_first)+" "+random.choice(enemy_name_last)
+    
+    elite_enemy = random.randint(0, 10)
+    print(elite_enemy)
+
+    if elite_enemy >= 7:
+        elite_enemy = True
+    else:
+        elite_enemy = False
 
     if elite_enemy is True:
         Enemy.dmg = random.randint(15, 30)
@@ -145,6 +153,8 @@ def player_attack():
         print("You fumble and miss!")
         return 0
 
+
+
 def battle():
     print("\nIn front of you, you can see your opponent...")
     print(f"It's the {Enemy.name}.")
@@ -155,7 +165,7 @@ def battle():
 
 player_character = player_creation()
 
-elite_enemy = True
+elite_enemy = None
 random_enemy = enemy_creation(elite_enemy)
 
 battle()
