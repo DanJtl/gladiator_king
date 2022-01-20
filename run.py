@@ -61,7 +61,7 @@ def player_creation():
         Player.health = 100
         Player.luck = 8
 
-    print("The guards turn to you, and you know it's time to pick a weapon...")
+    print("\nThe guards turn to you, and you know it's time to pick a weapon...")
     print("Which one do you choose?")
 
     """
@@ -85,10 +85,10 @@ def player_creation():
         Player.dmg += 20
         Player.luck += 2
 
-    print("As you enter the arena, you hear the crowd goes wild...")
+    print("\nAs you enter the arena, you hear the crowd goes wild...")
     Player.name = input("What is your name?\n")
-    print(Player.name.upper(), "! ...echoes through the arena.")
-    print("Your stats are:\n")
+    print(f"\n{Player.name.upper()}! ...echoes through the arena.\n")
+    print("Your stats are:")
 
     return [Player.name, Player.dmg, Player.health, Player.luck]
 
@@ -114,17 +114,22 @@ def enemy_creation(elite_enemy):
         
         return Enemy(Enemy.name, Enemy.dmg, Enemy.health, Enemy.luck)
 
-def enemy_attack():
+def battle():
+    print("\nIn front of you, you can see your opponent...")
+    print(f"It's the {Enemy.name}.")
+    print("\nIt's stats are:")
 
-elite_enemy = False
 
+
+# def enemy_attack():
+# Save character stats as a list
+character_stats = player_creation()
+player_character = Player(character_stats[0], character_stats[1], character_stats[2], character_stats[3])
+pprint(vars(player_character))
+
+elite_enemy = True
 random_enemy = enemy_creation(elite_enemy)
 
+battle()
+
 pprint(vars(random_enemy))
-
-
-# Save character stats as a list
-#character_stats = player_creation()
-#player_character = Player(character_stats[0], character_stats[1], character_stats[2], character_stats[3])
-
-#pprint(vars(player_character))
