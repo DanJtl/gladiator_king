@@ -7,93 +7,29 @@ class Player:
     """
     Creates class for player
     """
-    def __init__(self, player_name, player_dmg, player_health, player_luck):
-        self.name = player_name
-        self.dmg = player_dmg
-        self.health = player_health
-        self.luck = player_luck
-
-    """
-    Getters for player class - so you can, for example, check/return health.
-    Getters and setters learned from:
-    https://medium.com/@pranaygore/setters-and-getters-in-python-76b5473b3c83
-    """
-    def getName(self):
-        return self.name
-
-    def getDmg(self):
-        return self.dmg
-
-    def getHealth(self):
-        return self.health
-
-    def getLuck(self):
-        return self.luck
-
-    # Setters for player class - so you can update the health attribute e.g.
-    def setName(self, update_name):
-        self.name = update_name
-
-    def setDmg(self, update_dmg):
-        self.dmg = update_dmg
-
-    def setHealth(self, update_health):
-        self.health = update_health
-
-    def setLuck(self, update_luck):
-        self.luck = update_luck
+    def __init__(self, name, dmg, health, luck):
+        self.name = name
+        self.dmg = dmg
+        self.health = health
+        self.luck = luck
 
 class Enemy:
     """
     Creates base class for enemies
     """
-    def __init__(self, enemy_name, enemy_dmg, enemy_health, enemy_luck):
-        self.name = enemy_name
-        self.dmg = enemy_dmg
-        self.health = enemy_health
-        self.luck = enemy_luck
-
-    # Getters for enemy class
-    def getName(self):
-        return self.name
-
-    def getDmg(self):
-        return self.dmg
-
-    def getHealth(self):
-        return self.health
-
-    def getLuck(self):
-        return self.luck
-
-    # Setters for enemy class
-    def setName(self, update_name):
-        self.name = update_name
-
-    def setDmg(self, update_dmg):
-        self.dmg = update_dmg
-
-    def setHealth(self, update_health):
-        self.health = update_health
-
-    def setLuck(self, update_luck):
-        self.luck = update_luck
+    def __init__(self, name, dmg, health, luck):
+        self.name = name
+        self.dmg = dmg
+        self.health = health
+        self.luck = luck
 
 class Elite(Enemy):
     """
     Create elite enemies by inherit from enemy class
     """
-    def __init__(self, enemy_name, enemy_dmg, enemy_health, enemy_luck, elite_special):
-        super().__init__(enemy_name, enemy_dmg, enemy_health, enemy_luck)
-        self.special = elite_special
-
-    # Getter for elite class
-    def getSpecial(self):
-        return self.special
-
-    # Setter for elite class
-    def setSpecial(self, update_special):
-        self.special = update_special
+    def __init__(self, name, dmg, health, luck, special):
+        super().__init__(name, dmg, health, luck)
+        self.special = special
 
 # Create a character by letting the player answer some questions
 def player_creation():
@@ -161,22 +97,22 @@ def enemy_creation(elite_enemy):
     enemy_name_first = ("Angry", "Big", "Aggresive", "Furious", "Crazy", "Creepy", "Dangerous", "Evil", "Powerful", "Scary")
     enemy_name_last = ("Goblin", "Troll", "Undead", "Monster", "Orc", "Zombie", "Skeleton", "Cyclop", "Dragon", "Ghoul")
 
-    enemy_name = random.choice(enemy_name_first)+" "+random.choice(enemy_name_last)
+    Enemy.name = random.choice(enemy_name_first)+" "+random.choice(enemy_name_last)
     
-    if elite_enemy == True:
-        dmg = random.randint(15, 30)
-        health = random.randint(80, 160)
-        luck = random.randint(3, 10)
-        special = random.randint(40, 60)
+    if elite_enemy is True:
+        Enemy.dmg = random.randint(15, 30)
+        Enemy.health = random.randint(80, 160)
+        Enemy.luck = random.randint(3, 10)
+        Enemy.special = random.randint(40, 60)
 
-        return Elite(enemy_name, dmg, health, luck, special)
+        return Elite(Enemy.name, Enemy.dmg, Enemy.health, Enemy.luck, Enemy.special)
 
     else:
-        dmg = random.randint(1, 15)
-        health = random.randint(20, 80)
-        luck = random.randint(1, 6)
+        Enemy.dmg = random.randint(1, 15)
+        Enemy.health = random.randint(20, 80)
+        Enemy.luck = random.randint(1, 6)
         
-        return Enemy(enemy_name, dmg, health, luck)
+        return Enemy(Enemy.name, Enemy.dmg, Enemy.health, Enemy.luck)
 
 def enemy_attack():
 
