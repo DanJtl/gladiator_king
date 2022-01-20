@@ -123,7 +123,7 @@ def enemy_creation(elite_enemy):
 
 # Attack function for enemies
 def enemy_attack():
-    print(f"\n{Enemy.name} is attacking you...")
+    print(f"\n{Enemy.name} rushes towards you and attacks...")
     hit = random.randint(0, 10)
 
     if hit <= Enemy.luck:
@@ -134,16 +134,19 @@ def enemy_attack():
 
     else:
         print(f"{Enemy.name} fumbles and misses!")
-        return 0
 
 # Attack function for player
 def player_attack():
-    print("You look at the enemy and decides to do a...")
+    print("\nIn front of you, you can see your opponent...")
+    print(f"It's the {Enemy.name}.")
+    print("\nIt's stats are:")
+    pprint(vars(random_enemy))
+    print("\nYou look at the enemy and decides to do a...")
     attack_choice = input("a) Fast attack.\nb) Normal attack.\nc) Charge attack.\n").lower()
 
     while attack_choice != "a" and attack_choice != "b" and attack_choice != "c":
         print("You need to type: a, b or c...")
-        prin("You look at the enemy and decides to do a...")
+        prin("\nYou look at the enemy and decide to do a...")
         attack_choice = input("a) Fast attack.\nb) Normal attack.\nc) Charge attack.\n").lower()
 
     if attack_choice == "a":
@@ -168,7 +171,7 @@ def player_attack():
 
     else:
         print("You fumble and miss!")
-        
+
     if attack_choice == "a":
         Player.dmg += 10
         Player.luck -= 4
@@ -180,22 +183,16 @@ def player_attack():
         Player.dmg -= 20
         Player.luck += 2
 
-
-
+# Battle function
 def battle():
-    print("\nIn front of you, you can see your opponent...")
-    print(f"It's the {Enemy.name}.")
-    print("\nIt's stats are:")
-    pprint(vars(random_enemy))
-
-
+    
 
 player_character = player_creation()
 
 elite_enemy = None
 random_enemy = enemy_creation(elite_enemy)
 
-battle()
+#battle()
 player_attack()
 print(Player.health)
 print(Enemy.health)
