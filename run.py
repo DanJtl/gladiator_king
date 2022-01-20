@@ -90,15 +90,16 @@ def player_creation():
     print(f"\n{Player.name.upper()}! ...echoes through the arena.\n")
     print("Your stats are:")
 
-    return [Player.name, Player.dmg, Player.health, Player.luck]
+    return Player(Player.name, Player.dmg, Player.health, Player.luck)
 
 # Create an enemy and set enemy stats
 def enemy_creation(elite_enemy):
+    pprint(vars(player_character))
     enemy_name_first = ("Angry", "Big", "Aggresive", "Furious", "Crazy", "Creepy", "Dangerous", "Evil", "Powerful", "Scary")
     enemy_name_last = ("Goblin", "Troll", "Undead", "Monster", "Orc", "Zombie", "Skeleton", "Cyclop", "Dragon", "Ghoul")
 
     Enemy.name = random.choice(enemy_name_first)+" "+random.choice(enemy_name_last)
-    
+
     if elite_enemy is True:
         Enemy.dmg = random.randint(15, 30)
         Enemy.health = random.randint(80, 160)
@@ -111,25 +112,40 @@ def enemy_creation(elite_enemy):
         Enemy.dmg = random.randint(1, 15)
         Enemy.health = random.randint(20, 80)
         Enemy.luck = random.randint(1, 6)
-        
+ 
         return Enemy(Enemy.name, Enemy.dmg, Enemy.health, Enemy.luck)
+
+# Attack function for enemies
+def enemy_attack():
+    print(f"{Enemy.name} is attacking you...")
+    hit = random.randint(0, 10)
+
+    if hit <= Enemy.luck:
+        print("It hits you and does...")
+        Player.health -= Enemy.dmg
+        print(f"{Enemy.dmg} in damage!")
+        return Player.health
+
+    else:
+        print(f"{Enemy.name} fumbles and misses!")
+        return 0
 
 def battle():
     print("\nIn front of you, you can see your opponent...")
     print(f"It's the {Enemy.name}.")
     print("\nIt's stats are:")
+    pprint(vars(random_enemy))
 
 
 
 # def enemy_attack():
 # Save character stats as a list
-character_stats = player_creation()
-player_character = Player(character_stats[0], character_stats[1], character_stats[2], character_stats[3])
-pprint(vars(player_character))
+
+player_character = player_creation()
 
 elite_enemy = True
 random_enemy = enemy_creation(elite_enemy)
 
 battle()
 
-pprint(vars(random_enemy))
+
