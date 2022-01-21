@@ -48,17 +48,17 @@ def player_creation():
     if player_stats == "a":
         Player.dmg = 40
         Player.health = 80
-        Player.luck = random.randint(2, 6)
+        Player.luck = random.randint(3, 8)
 
     elif player_stats == "b":
         Player.dmg = 20
         Player.health = 140
-        Player.luck = random.randint(2, 6)
+        Player.luck = random.randint(3, 8)
 
     elif player_stats == "c":
         Player.dmg = 20
         Player.health = 100
-        Player.luck = random.randint(4, 6)
+        Player.luck = random.randint(5, 8)
 
     print("\nThe guards turn to you, and you know it's time to pick a weapon...")
     print("Which one do you choose?")
@@ -93,7 +93,7 @@ def player_creation():
 
 # Create an enemy and set enemy stats
 def enemy_creation(elite_enemy):
-    pprint(vars(player_character))
+    
     enemy_name_first = ("Angry", "Big", "Aggresive", "Furious", "Crazy", "Creepy", "Dangerous", "Evil", "Powerful", "Scary")
     enemy_name_last = ("Goblin", "Troll", "Undead", "Monster", "Orc", "Zombie", "Skeleton", "Cyclop", "Dragon", "Ghoul")
 
@@ -146,7 +146,7 @@ def player_attack():
 
     while attack_choice != "a" and attack_choice != "b" and attack_choice != "c":
         print("You need to type: a, b or c...")
-        prin("\nYou look at the enemy and decide to do a...")
+        print("\nYou look at the enemy and decide to do a...")
         attack_choice = input("a) Fast attack.\nb) Normal attack.\nc) Charge attack.\n").lower()
 
     if attack_choice == "a":
@@ -191,8 +191,9 @@ def battle():
         player_attack()
         print(f"\n{Enemy.name}'s health is now {Enemy.health}.")
         if Enemy.health <= 0:
-            print(f"You killed the {Enemy.name}!")
+            print(f"You killed the {Enemy.name}!\n")
             print(f"Everyone in the arena is shouting your name... {Player.name.upper()}!")
+            print(f"Your health is now {Player.health}...")
         else:
             enemy_attack()
             print(f"\nYour Health is now {Player.health}.")
@@ -203,7 +204,7 @@ def battle():
 
 
 player_character = player_creation()
-
+pprint(vars(player_character))
 elite_enemy = None
 random_enemy = enemy_creation(elite_enemy)
 battle()
