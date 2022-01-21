@@ -99,7 +99,7 @@ def create_player():
         player.dmg += 20
         player.luck += 2
 
-    print("\nAs you enter the arena, you hear the crowd goes wild...")
+    print("As you enter the arena, you hear the crowd goes wild...")
     player.name = input("What is your name?\n")
     print(f"\n{player.name.upper()}! ...echoes through the arena.\n")
     print("Your stats are:")
@@ -112,6 +112,7 @@ def create_enemy():
     Create an enemy and set enemy stats
     """
     enemy = Enemy("Test", 0, 0, 0,)
+    elite_enemy = Elite("Test", 0, 0, 0, 0)
     enemy_first = (
             "Angry", "Big", "Aggresive", "Furious", "Crazy",
             "Creepy", "Dangerous", "Evil", "Powerful", "Scary"
@@ -156,10 +157,18 @@ def enemy_attack():
     hit = random.randint(0, 10)
 
     if hit <= enemy.luck:
-        print("It hits you and does...")
-        player.health -= enemy.dmg
-        print(f"{enemy.dmg} in damage!")
-        return player.health
+        if hasattr(enemy, "special"):
+            strike = random.randint(0, 10)
+            if strike < enemy.luck:
+                print("It hits you with its special attack and does...")
+                player.health -= enemy.special
+                print(f"{enemy.special} in damage!")
+                return player.health
+            else:
+                print("It hits you and does...")
+                player.health -= enemy.dmg
+                print(f"{enemy.dmg} in damage!")
+                return player.health
 
     else:
         print(f"{enemy.name} fumbles and misses!")
@@ -169,10 +178,6 @@ def player_attack():
     """
     Attack function for player
     """
-    print("\nIn front of you, you can see your opponent...")
-    print(f"It's the {enemy.name}.")
-    print("\nIt's stats are:")
-    pprint(vars(enemy))
     print("\nYou look at the enemy and decides to do a...")
     attack = input("""
         a) Fast attack.
@@ -189,15 +194,15 @@ def player_attack():
 
     if attack == "a":
         print("You raise your wepaon...")
-        print(f"and attack the {enemy.name} with a fast attack!")
+        print(f"and attack the {enemy.name} with a fast attack!\n")
 
     elif attack == "b":
         print("You raise your wepaon...")
-        print(f"and attack the {enemy.name} with a normal attack!")
+        print(f"and attack the {enemy.name} with a normal attack\n")
 
     elif attack == "c":
         print("You raise your wepaon...")
-        print(f"and attack the {enemy.name} with a charge attack!")
+        print(f"and attack the {enemy.name} with a charge attack!\n")
 
     hit = random.randint(0, 10)
 
@@ -220,7 +225,7 @@ def battle():
         print(f"\n{enemy.name}'s health is now {enemy.health}.")
         if enemy.health <= 0:
             print(f"You killed the {enemy.name}!\n")
-            print("Everyone in the arena is shouting your name...")
+            print("Everyone in the arena is shouting your name...\n")
             print(f"{player.name.upper()}!")
             print(f"Your health is now {player.health}...")
         else:
@@ -234,5 +239,8 @@ def battle():
 elite_enemy = None
 player = create_player()
 enemy = create_enemy()
-
+print("\nIn front of you, you can see your opponent...")
+print(f"It's the {enemy.name}.")
+print("\nIt's stats are:")
+pprint(vars(enemy))
 battle()
