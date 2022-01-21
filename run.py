@@ -12,6 +12,7 @@ class Player:
         self.health = health
         self.luck = luck
 
+
 class Enemy:
     """
     Creates base class for enemies
@@ -22,6 +23,7 @@ class Enemy:
         self.health = health
         self.luck = luck
 
+
 class Elite(Enemy):
     """
     Create elite enemies by inherit from enemy class
@@ -30,20 +32,28 @@ class Elite(Enemy):
         super().__init__(name, dmg, health, luck)
         self.special = special
 
-# Create a character by letting the player answer some questions
-def player_creation():
+
+def create_player():
+    """
+    Create a character by letting the player answer some questions.
+    It also sets the player attributes and making sure they
+    input correct data by using a while loop.
+    """
     print("You are once again led by three guards towards the iron gate…")
     print("The iron gate opens slowly, and you feel…")
 
-    """
-    Sets the player attributes and making sure they
-    input correct data by using a while loop
-    """
-    player_stats = input("a) ...extra strong.\nb) ...young and athletic.\nc) ...lucky and pumped.\n").lower()
+    player_stats = input("""
+        a) ...extra strong.
+        b) ...young and athletic.
+        c) ...lucky and pumped.\n""").lower()
+
     while player_stats != "a" and player_stats != "b" and player_stats != "c":
         print("You need to type: a, b or c...")
         print("The iron gate opens slowly, and you feel…")
-        player_stats = input("a) ...extra strong.\nb) …young and athletic.\nc) …lucky and pumped.\n").lower()
+        player_stats = input("""
+            a) ...extra strong.
+            b) …young and athletic.
+            c) …lucky and pumped.\n""").lower()
 
     if player_stats == "a":
         Player.dmg = 40
@@ -60,27 +70,31 @@ def player_creation():
         Player.health = 100
         Player.luck = random.randint(5, 8)
 
-    print("\nThe guards turn to you, and you know it's time to pick a weapon...")
+    print("\nThe guards turn to you...")
+    print("\n...and you know it's time to pick a weapon...")
     print("Which one do you choose?")
 
-    """
-    Add to specific player attribute depending on their choice,
-    and making sure they input correct data by using a while loop
-    """
-    weapon_choice = input("a) Executioner's Sword.\nb) Sword and shield.\nc) Halberd.\n").lower()
-    while weapon_choice != "a" and weapon_choice != "b" and weapon_choice != "c":
+    weapon = input("""
+        a) Executioner's Sword.
+        b) Sword and shield.
+        c) Halberd.\n""").lower()
+
+    while weapon != "a" and weapon != "b" and weapon != "c":
         print("You need to type: a, b or c...")
         print("Which one do you choose?")
-        weapon_choice = input("a) Executioner's Sword.\nb) Sword and shield.\nc) Halberd.\n").lower()
+        weapon = input("""
+            a) Executioner's Sword.
+            b) Sword and shield.
+            c) Halberd.\n""").lower()
 
-    if weapon_choice == "a":
+    if weapon == "a":
         Player.dmg += 30
 
-    elif weapon_choice == "b":
+    elif weapon == "b":
         Player.dmg += 10
         Player.health += 20
 
-    elif weapon_choice == "c":
+    elif weapon == "c":
         Player.dmg += 20
         Player.luck += 2
 
@@ -91,13 +105,20 @@ def player_creation():
 
     return Player(Player.name, Player.dmg, Player.health, Player.luck)
 
-# Create an enemy and set enemy stats
-def enemy_creation(elite_enemy):
-    
-    enemy_name_first = ("Angry", "Big", "Aggresive", "Furious", "Crazy", "Creepy", "Dangerous", "Evil", "Powerful", "Scary")
-    enemy_name_last = ("Goblin", "Troll", "Undead", "Monster", "Orc", "Zombie", "Skeleton", "Cyclop", "Dragon", "Ghoul")
+def create_enemy():
+    """
+    Create an enemy and set enemy stats
+    """
+    enemy_first = (
+            "Angry", "Big", "Aggresive", "Furious", "Crazy",
+            "Creepy", "Dangerous", "Evil", "Powerful", "Scary"
+        )
+    enemy_last = (
+            "Goblin", "Troll", "Undead", "Monster", "Orc",
+            "Zombie", "Skeleton", "Cyclop", "Dragon", "Ghoul"
+        )
 
-    Enemy.name = random.choice(enemy_name_first)+" "+random.choice(enemy_name_last)
+    Enemy.name = random.choice(enemy_first)+" "+random.choice(enemy_last)
 
     elite_enemy = random.randint(0, 10)
 
@@ -112,7 +133,10 @@ def enemy_creation(elite_enemy):
         Enemy.luck = random.randint(3, 10)
         Enemy.special = random.randint(40, 60)
 
-        return Elite(Enemy.name, Enemy.dmg, Enemy.health, Enemy.luck, Enemy.special)
+        return Elite(
+                Enemy.name, Enemy.dmg, Enemy.health,
+                Enemy.luck, Enemy.special
+            )
 
     else:
         Enemy.dmg = random.randint(1, 15)
@@ -121,8 +145,11 @@ def enemy_creation(elite_enemy):
 
         return Enemy(Enemy.name, Enemy.dmg, Enemy.health, Enemy.luck)
 
-# Attack function for enemies
+
 def enemy_attack():
+    """
+    Attack function for enemies
+    """
     print(f"\n{Enemy.name} rushes towards you and attacks...")
     hit = random.randint(0, 10)
 
@@ -135,32 +162,41 @@ def enemy_attack():
     else:
         print(f"{Enemy.name} fumbles and misses!")
 
-# Attack function for player
+
 def player_attack():
+    """
+    Attack function for player
+    """
     print("\nIn front of you, you can see your opponent...")
     print(f"It's the {Enemy.name}.")
     print("\nIt's stats are:")
-    pprint(vars(random_enemy))
+    pprint(vars(enemy))
     print("\nYou look at the enemy and decides to do a...")
-    attack_choice = input("a) Fast attack.\nb) Normal attack.\nc) Charge attack.\n").lower()
+    attack = input("""
+        a) Fast attack.
+        b) Normal attack.
+        c) Charge attack.\n""").lower()
 
-    while attack_choice != "a" and attack_choice != "b" and attack_choice != "c":
+    while attack != "a" and attack != "b" and attack != "c":
         print("You need to type: a, b or c...")
         print("\nYou look at the enemy and decide to do a...")
-        attack_choice = input("a) Fast attack.\nb) Normal attack.\nc) Charge attack.\n").lower()
+        attack = input("""
+            a) Fast attack.
+            b) Normal attack.
+            c) Charge attack.\n""").lower()
 
-    if attack_choice == "a":
-        Player.dmg -= 10
-        Player.luck += 2
+    if attack == "a":
+        print("You raise your wepaon...")
+        print(f"and attack the {Enemy.name} with a fast attack")
+        
+    elif attack == "b":
+        print("You raise your wepaon...")
+        print(f"and attack the {Enemy.name} with a normal attack")
 
-    elif attack_choice == "b":
-        Player.dmg += 5
+    elif attack == "c":
+        print("You raise your wepaon...")
+        print(f"and attack the {Enemy.name} with a charge attack")
 
-    elif attack_choice == "c":
-        Player.dmg += 20
-        Player.luck -= 2
-
-    print(f"\nYou raise your weapon and attack the {Enemy.name}...")
     hit = random.randint(0, 10)
 
     if hit <= Player.luck:
@@ -171,18 +207,7 @@ def player_attack():
 
     else:
         print("You fumble and miss!")
-"""
-    if attack_choice == "a":
-        Player.dmg += 10
-        Player.luck -= 2
 
-    elif attack_choice == "b":
-        Player.dmg -= 5
-
-    elif attack_choice == "c":
-        Player.dmg -= 20
-        Player.luck += 2
-"""
 # Battle function
 def battle():
 
@@ -200,17 +225,12 @@ def battle():
         if Player.health <= 0:
             print("You fought your hardest...")
             print("...but it wasn't enough.")
-        
 
 
-player_character = player_creation()
-pprint(vars(player_character))
-elite_enemy = None
-random_enemy = enemy_creation(elite_enemy)
+player = None
+enemy = None
+
+player = create_player()
+pprint(vars(player))
+enemy = create_enemy()
 battle()
-
-#battle()
-#player_attack()
-#print(Player.health)
-#print(Enemy.health)
-#pprint(vars(player_character))
