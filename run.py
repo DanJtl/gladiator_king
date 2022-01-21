@@ -2,7 +2,7 @@ import random
 from pprint import pprint
 
 
-class Player:
+class Player_char:
     """
     Creates class for player
     """
@@ -13,7 +13,7 @@ class Player:
         self.luck = luck
 
 
-class Enemy:
+class Enemy_char:
     """
     Creates base class for enemies
     """
@@ -24,7 +24,7 @@ class Enemy:
         self.luck = luck
 
 
-class Elite(Enemy):
+class Elite(Enemy_char):
     """
     Create elite enemies by inherit from enemy class
     """
@@ -56,19 +56,19 @@ def create_player():
             c) …lucky and pumped.\n""").lower()
 
     if player_stats == "a":
-        Player.dmg = 40
-        Player.health = 80
-        Player.luck = random.randint(3, 8)
+        player.dmg = 40
+        player.health = 80
+        player.luck = random.randint(3, 8)
 
     elif player_stats == "b":
-        Player.dmg = 20
-        Player.health = 140
-        Player.luck = random.randint(3, 8)
+        player.dmg = 20
+        player.health = 140
+        player.luck = random.randint(3, 8)
 
     elif player_stats == "c":
-        Player.dmg = 20
-        Player.health = 100
-        Player.luck = random.randint(5, 8)
+        player.dmg = 20
+        player.health = 100
+        player.luck = random.randint(5, 8)
 
     print("\nThe guards turn to you...")
     print("\n...and you know it's time to pick a weapon...")
@@ -88,22 +88,23 @@ def create_player():
             c) Halberd.\n""").lower()
 
     if weapon == "a":
-        Player.dmg += 30
+        player.dmg += 30
 
     elif weapon == "b":
-        Player.dmg += 10
-        Player.health += 20
+        player.dmg += 10
+        player.health += 20
 
     elif weapon == "c":
-        Player.dmg += 20
-        Player.luck += 2
+        player.dmg += 20
+        player.luck += 2
 
     print("\nAs you enter the arena, you hear the crowd goes wild...")
-    Player.name = input("What is your name?\n")
-    print(f"\n{Player.name.upper()}! ...echoes through the arena.\n")
+    player.name = input("What is your name?\n")
+    print(f"\n{player.name.upper()}! ...echoes through the arena.\n")
     print("Your stats are:")
 
-    return Player(Player.name, Player.dmg, Player.health, Player.luck)
+    return Player_char(player.name, player.dmg, player.health, player.luck)
+
 
 def create_enemy():
     """
@@ -118,7 +119,7 @@ def create_enemy():
             "Zombie", "Skeleton", "Cyclop", "Dragon", "Ghoul"
         )
 
-    Enemy.name = random.choice(enemy_first)+" "+random.choice(enemy_last)
+    enemy.name = random.choice(enemy_first)+" "+random.choice(enemy_last)
 
     elite_enemy = random.randint(0, 10)
 
@@ -128,39 +129,39 @@ def create_enemy():
         elite_enemy = False
 
     if elite_enemy is True:
-        Enemy.dmg = random.randint(15, 30)
-        Enemy.health = random.randint(120, 200)
-        Enemy.luck = random.randint(3, 10)
-        Enemy.special = random.randint(40, 60)
+        enemy.dmg = random.randint(15, 30)
+        enemy.health = random.randint(120, 200)
+        enemy.luck = random.randint(3, 10)
+        enemy.special = random.randint(40, 60)
 
         return Elite(
-                Enemy.name, Enemy.dmg, Enemy.health,
-                Enemy.luck, Enemy.special
+                enemy.name, enemy.dmg, enemy.health,
+                enemy.luck, enemy.special
             )
 
     else:
-        Enemy.dmg = random.randint(1, 15)
-        Enemy.health = random.randint(50, 120)
-        Enemy.luck = random.randint(1, 6)
+        enemy.dmg = random.randint(1, 15)
+        enemy.health = random.randint(50, 120)
+        enemy.luck = random.randint(1, 6)
 
-        return Enemy(Enemy.name, Enemy.dmg, Enemy.health, Enemy.luck)
+        return Enemy_char(enemy.name, enemy.dmg, enemy.health, enemy.luck)
 
 
 def enemy_attack():
     """
     Attack function for enemies
     """
-    print(f"\n{Enemy.name} rushes towards you and attacks...")
+    print(f"\n{enemy.name} rushes towards you and attacks...")
     hit = random.randint(0, 10)
 
-    if hit <= Enemy.luck:
+    if hit <= enemy.luck:
         print("It hits you and does...")
-        Player.health -= Enemy.dmg
-        print(f"{Enemy.dmg} in damage!")
-        return Player.health
+        player.health -= enemy.dmg
+        print(f"{enemy.dmg} in damage!")
+        return player.health
 
     else:
-        print(f"{Enemy.name} fumbles and misses!")
+        print(f"{enemy.name} fumbles and misses!")
 
 
 def player_attack():
@@ -168,7 +169,7 @@ def player_attack():
     Attack function for player
     """
     print("\nIn front of you, you can see your opponent...")
-    print(f"It's the {Enemy.name}.")
+    print(f"It's the {enemy.name}.")
     print("\nIt's stats are:")
     pprint(vars(enemy))
     print("\nYou look at the enemy and decides to do a...")
@@ -187,42 +188,45 @@ def player_attack():
 
     if attack == "a":
         print("You raise your wepaon...")
-        print(f"and attack the {Enemy.name} with a fast attack")
-        
+        print(f"and attack the {enemy.name} with a fast attack")
+
     elif attack == "b":
         print("You raise your wepaon...")
-        print(f"and attack the {Enemy.name} with a normal attack")
+        print(f"and attack the {enemy.name} with a normal attack")
 
     elif attack == "c":
         print("You raise your wepaon...")
-        print(f"and attack the {Enemy.name} with a charge attack")
+        print(f"and attack the {enemy.name} with a charge attack")
 
     hit = random.randint(0, 10)
 
-    if hit <= Player.luck:
+    if hit <= player.luck:
         print("You hit it and do...")
-        Enemy.health -= Player.dmg
-        print(f"{Player.dmg} in damage!")
-        return Enemy.health
+        enemy.health -= player.dmg
+        print(f"{player.dmg} in damage!")
+        return enemy.health
 
     else:
         print("You fumble and miss!")
 
-# Battle function
-def battle():
 
-    while Player.health > 0 and Enemy.health > 0:
+def battle():
+    """
+    Battle function
+    """
+    while player.health > 0 and enemy.health > 0:
 
         player_attack()
-        print(f"\n{Enemy.name}'s health is now {Enemy.health}.")
-        if Enemy.health <= 0:
-            print(f"You killed the {Enemy.name}!\n")
-            print(f"Everyone in the arena is shouting your name... {Player.name.upper()}!")
-            print(f"Your health is now {Player.health}...")
+        print(f"\n{enemy.name}'s health is now {enemy.health}.")
+        if enemy.health <= 0:
+            print(f"You killed the {enemy.name}!\n")
+            print("Everyone in the arena is shouting your name...")
+            print(f"{player.name.upper()}!")
+            print(f"Your health is now {player.health}...")
         else:
             enemy_attack()
-            print(f"\nYour Health is now {Player.health}.")
-        if Player.health <= 0:
+            print(f"\nYour Health is now {player.health}.")
+        if player.health <= 0:
             print("You fought your hardest...")
             print("...but it wasn't enough.")
 
