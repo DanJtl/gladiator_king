@@ -126,7 +126,7 @@ def create_enemy():
 
     elite_enemy = random.randint(0, 10)
 
-    if elite_enemy >= 7:
+    if elite_enemy >= 1:
         elite_enemy = True
     else:
         elite_enemy = False
@@ -169,6 +169,11 @@ def enemy_attack():
                 player.health -= enemy.dmg
                 print(f"{enemy.dmg} in damage!")
                 return player.health
+        else:
+            print("It hits you and does...")
+            player.health -= enemy.dmg
+            print(f"{enemy.dmg} in damage!")
+            return player.health
 
     else:
         print(f"{enemy.name} fumbles and misses!")
@@ -198,7 +203,7 @@ def player_attack():
 
     elif attack == "b":
         print("You raise your wepaon...")
-        print(f"and attack the {enemy.name} with a normal attack\n")
+        print(f"and attack the {enemy.name} with a normal attack!\n")
 
     elif attack == "c":
         print("You raise your wepaon...")
@@ -236,7 +241,6 @@ def battle():
             print("...but it wasn't enough.")
 
 
-elite_enemy = None
 player = create_player()
 enemy = create_enemy()
 print("\nIn front of you, you can see your opponent...")
