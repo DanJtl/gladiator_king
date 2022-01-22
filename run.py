@@ -117,7 +117,7 @@ def create_enemy():
     Create an enemy and set enemy stats
     """
     enemy = Enemy("Enemy", 0, 0, 0,)
-    elite_enemy = Elite("Test", 0, 0, 0, 0)
+    elite_enemy = Elite("Elite", 0, 0, 0, 0)
     enemy_first = (
             "Angry", "Big", "Aggresive", "Furious", "Crazy",
             "Creepy", "Dangerous", "Evil", "Powerful", "Scary"
@@ -127,7 +127,7 @@ def create_enemy():
             "Zombie", "Skeleton", "Cyclop", "Dragon", "Ghoul"
         )
 
-    enemy.name = random.choice(enemy_first)+" "+random.choice(enemy_last)
+    enemy.name = random.choice(enemy_first) + " " + random.choice(enemy_last)
 
     elite_enemy = random.randint(0, 10)
 
@@ -238,6 +238,7 @@ def battle():
             print("Everyone in the arena is shouting your name...\n")
             print(f"{player.name.upper()}!")
             print(f"Your health is now {player.health}...")
+
         else:
             enemy_attack()
             print(f"\nYour Health is now {player.health}.")
@@ -246,10 +247,34 @@ def battle():
             print("...but it wasn't enough.")
 
 
-player = create_player()
-enemy = create_enemy()
-print("\nIn front of you, you can see your opponent...")
-print(f"It's the {enemy.name}.")
-print("\nIt's stats are:")
-pprint(vars(enemy))
-battle()
+def play_again():
+    again = input("\nDo you want to fight again?\na) Yes!\nb) No!)\n").lower()
+    while again != "a" and again != "b":
+        print("You need to type: a or b...")
+        again = input("""
+            Do you want to fight again?\n
+            a) Yes!
+            b) No!)\n""").lower()
+
+    if again == "a":
+        game()
+    elif again == "b":
+        print("\nSee you next time...")
+
+
+def game():
+    """
+    Run the game
+    """
+    global player, enemy
+    player = create_player()
+    enemy = create_enemy()
+    print("\nIn front of you, you can see your opponent...")
+    print(f"It's the {enemy.name}.")
+    print("\nIt's stats are:")
+    pprint(vars(enemy))
+    battle()
+    play_again()
+
+
+game()
