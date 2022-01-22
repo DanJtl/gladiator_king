@@ -15,6 +15,7 @@ During the fight, the player must choose an attack to do, and if he is lucky eno
 ---
 
 ### **Build Character** 
+When the game starts, the player creates a characther by answering some questions. The answer to these questions will set the player attributes, like health for example.
 
 
 ![Build Character](assets/images/question_area.jpg)
