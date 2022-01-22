@@ -238,13 +238,57 @@ def battle():
             print("Everyone in the arena is shouting your name...\n")
             print(f"{player.name.upper()}!")
             print(f"Your health is now {player.health}...")
-
+            new_battle()
         else:
             enemy_attack()
             print(f"\nYour Health is now {player.health}.")
         if player.health <= 0:
             print("You fought your hardest...")
             print("...but it wasn't enough.")
+
+
+def new_battle():
+    response = input("""
+        Your see your next opponent rushing into the arena!
+        When it looks at you...
+
+        a) ...you smile at it.
+        b) ...you ignore it.
+        c) ...you point threateningly at it.\n""").lower()
+
+    while response != "a" and response != "b" and response != "c":
+        print("You need to type: a, b or c...")
+        response = input("""
+            Your see your next opponent rushing into the arena!
+            When it looks at you...
+
+            a) ...you smile at it.
+            b) ...you ignore it.
+            c) ...you point threateningly at it.\n""").lower()
+    
+    if response == "a":
+        print("\nIt gets angrier!\n")
+        enemy = create_enemy()
+        print(f"It's the {enemy.name}.")
+        print("\nIt's stats are:")
+        pprint(vars(enemy))
+        battle()
+
+    elif response == "b":
+        print("\nIt looks at you intensely...\n")
+        enemy = create_enemy()
+        print(f"It's the {enemy.name}.")
+        print("\nIt's stats are:")
+        pprint(vars(enemy))
+        battle()
+
+    elif response == "c":
+        print("\nIt starts to roar!\n")
+        enemy = create_enemy()
+        print(f"It's the {enemy.name}.")
+        print("\nIt's stats are:")
+        pprint(vars(enemy))
+        battle()
 
 
 def play_again():
@@ -254,12 +298,12 @@ def play_again():
         again = input("""
             Do you want to fight again?\n
             a) Yes!
-            b) No!)\n""").lower()
+            b) No!\n""").lower()
 
     if again == "a":
         game()
     elif again == "b":
-        print("\nSee you next time...")
+        print("\nSee you next time...\n")
 
 
 def game():
