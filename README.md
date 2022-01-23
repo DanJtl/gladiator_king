@@ -65,7 +65,7 @@ When the player is dead, or the player has defeated the enemy, the player has a 
 - Add a function so the player can fight as many enemies he can until he dies.
 - Add more enemy classes.
 - Add more weapons.
-- Add different attacks - that manipulates the players attributes. 
+- Add different attacks - that manipulates the player attributes. 
 
 ---
 ## **UX**
