@@ -56,7 +56,7 @@ When the battle is on, the player and the enemy fight until someone is dead.
 ![Battle](images/battle.jpg)
 
 ### **Play Again**
-When the player is dead or has defeated the enemy, the player has a choice to play another match or leave the game.
+When the player is dead, or the player has defeated the enemy, the player has a choice to play another match or leave the game.
 
 ![Play Again](images/play_again.jpg)
 
