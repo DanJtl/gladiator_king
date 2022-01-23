@@ -108,7 +108,7 @@ No unfixed bugs.
 ### **Programs** ###
 - Gitpod: Used for writing code.
 - Git: Used for version-control.
-- GitHub: Used for store data and hosting platform.
+- GitHub: Used for store data.
 - Heroku: Used for deployment.
 ***
 
